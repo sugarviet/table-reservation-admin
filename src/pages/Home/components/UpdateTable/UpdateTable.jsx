@@ -4,7 +4,7 @@ import { Button, Modal, Form, Input, Select } from "antd";
 const { Option } = Select;
 const { TextArea } = Input;
 
-const CreateTable = (props) => {
+const UpdateTable = (props) => {
   const { isModalVisible, handleModalClose } = props;
 
   const onFinish = (values) => {
@@ -15,7 +15,7 @@ const CreateTable = (props) => {
   };
   return (
     <Modal
-      title={"Add more tables"}
+      title={"Update tables"}
       visible={isModalVisible}
       onCancel={handleModalClose}
       footer={null}
@@ -97,9 +97,9 @@ const CreateTable = (props) => {
   );
 };
 
-CreateTable.propTypes = {
+UpdateTable.propTypes = {
   isModalVisible: PropTypes.bool,
   handleModalClose: PropTypes.func,
 };
 
-export default CreateTable;
+export default UpdateTable;
