@@ -2,7 +2,8 @@ import { useState } from "react";
 import { Tabs, Table, Button } from "antd";
 import styles from "./Home.module.css";
 import ReservationInfo from "./components/ReservationInfo/ReservationInfo";
-import CreateTable from "../CreateTable/CreateTable";
+// import CreateTable from "../CreateTable/CreateTable";
+import AddTable from "./components/AddTable/AddTable";
 import UpdateTable from "./components/UpdateTable/UpdateTable";
 
 import { DeleteOutlined, EyeOutlined, EditOutlined, PlusCircleOutlined } from '@ant-design/icons';
@@ -169,7 +170,7 @@ const Home = () => {
       ) : null}
 
       {isModalShowAddTable ? (
-        <CreateTable
+        <AddTable
           isModalVisible={isModalShowAddTable}
           handleModalClose={handleModalShowAddTableClose}
         />

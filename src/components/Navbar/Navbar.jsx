@@ -1,9 +1,18 @@
 import { Layout, Avatar, Dropdown } from "antd";
 import { SearchOutlined, BellOutlined } from "@ant-design/icons";
 import styles from "./Navbar.module.css";
+import { useNavigate } from "react-router-dom";
+
 const { Header } = Layout;
 
 const Navbar = () => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    navigate('/')
+  }
+
   const items = [
     {
       label: 
@@ -34,7 +43,7 @@ const Navbar = () => {
       type: "divider",
     },
     {
-      label: "Logout",
+      label: <p onClick={handleLogout}>Logout</p>,
       key: "4",
     },
   ];
