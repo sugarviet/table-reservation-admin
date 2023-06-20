@@ -2,9 +2,11 @@ import { useState } from "react";
 import { Tabs, Table, Button, Tag } from "antd";
 import styles from "./Home.module.css";
 import ReservationInfo from "./components/ReservationInfo/ReservationInfo";
-// import CreateTable from "../CreateTable/CreateTable";
 import AddTable from "./components/AddTable/AddTable";
 import UpdateTable from "./components/UpdateTable/UpdateTable";
+
+// 
+// import jwt_decode from 'jwt-decode';
 
 import {
   EyeOutlined,
@@ -17,48 +19,6 @@ import {
 } from "../../services/Home/services";
 
 const { TabPane } = Tabs;
-
-// Sample table data
-const tables = [
-  {
-    id: 1,
-    name: "Table 1",
-    seats: 4,
-    description: "description 1",
-    reservations: [{ time: "6pm", customer: "John Doe" }],
-  },
-  {
-    id: 2,
-    name: "Table 2",
-    seats: 6,
-    description: "description 2",
-    reservations: [
-      { time: "8pm", customer: "Jane Smith" },
-      { time: "10pm", customer: "Michael Johnson" },
-    ],
-  },
-  {
-    id: 3,
-    name: "Table 3",
-    seats: 4,
-    description: "description 3",
-    reservations: [{ time: "6pm", customer: "Emma Davis" }],
-  },
-  {
-    id: 4,
-    name: "Table 4",
-    seats: 10,
-    description: "description 4",
-    reservations: [{ time: "8pm", customer: "David Brown" }],
-  },
-  {
-    id: 5,
-    name: "Table 5",
-    seats: 6,
-    description: "description 5",
-    reservations: [],
-  },
-];
 
 const timeSlots = ["6pm", "8pm", "10pm"];
 
@@ -75,17 +35,11 @@ const Home = () => {
   const [isModalShowAddTable, setIsModalShowAddTable] = useState(false);
   const [isModalShowUpdateTable, setIsModalShowUpdateTable] = useState(false);
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
   const handleTabChange = (activeKey) => {
-    console.log(activeKey);
     setSelectedCapacity(+activeKey);
   };
 
   const handleTableDelete = (tableId) => {
-    console.log("change status table with ID:", tableId);
     changeStatusTable(tableId);
   };
 
@@ -188,7 +142,6 @@ const Home = () => {
           <Table
             pagination={{ hideOnSinglePage: true, pageSize: 5 }}
             columns={renderTableColumns()}
-            // dataSource={tables.filter((t) => t.seats === 4)}
             dataSource={data}
           />
         </div>
@@ -199,7 +152,6 @@ const Home = () => {
           <Table
             pagination={{ hideOnSinglePage: true, pageSize: 5 }}
             columns={renderTableColumns()}
-            // dataSource={tables.filter((t) => t.seats === 6)}
             dataSource={data}
           />
         </div>
@@ -209,7 +161,6 @@ const Home = () => {
           <Table
             pagination={{ hideOnSinglePage: true, pageSize: 5 }}
             columns={renderTableColumns()}
-            // dataSource={tables.filter((t) => t.seats === 10)}
             dataSource={data}
           />
         </div>
@@ -241,7 +192,7 @@ const Home = () => {
           handleModalClose={handleModalShowTableInfoClose}
           isModalVisible={isModalShowTableInfoVisible}
           selectedTable={selectedTable}
-          tables={tables}
+          // tables={tables}
           timeSlots={timeSlots}
         />
       ) : null}

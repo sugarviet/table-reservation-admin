@@ -1,27 +1,20 @@
 import { Layout, Avatar, Dropdown } from "antd";
 import { SearchOutlined, BellOutlined } from "@ant-design/icons";
 import styles from "./Navbar.module.css";
-import { useNavigate } from "react-router-dom";
+import useNavbar from "./hooks/useNavbar";
 
 const { Header } = Layout;
 
 const Navbar = () => {
-  const navigate = useNavigate();
-
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    navigate('/')
-  }
-
+  const {decodedToken, handleLogout} = useNavbar()
   const items = [
     {
-      label: 
-      <div>
-        <h4>
-          Jaydon Frankie
-        </h4>
-        <small>demo@minimals.cc</small>
-      </div>,
+      label: (
+        <div>
+          <h4>{decodedToken.phone}</h4>
+          <small>{decodedToken.email}</small>
+        </div>
+      ),
       key: "0",
     },
     {
@@ -52,7 +45,10 @@ const Navbar = () => {
     <Header className={styles.header}>
       <nav className={styles.navbar}>
         <div className={styles.logo}>
-          <img src="https://seeklogo.com/images/A/ant-design-logo-EAB6B3D5D9-seeklogo.com.png" alt="logo" />
+          <img
+            src="https://seeklogo.com/images/A/ant-design-logo-EAB6B3D5D9-seeklogo.com.png"
+            alt="logo"
+          />
         </div>
         <div className={styles.actions}>
           <ul className={styles.actionsList}>
@@ -67,9 +63,12 @@ const Navbar = () => {
                 menu={{
                   items,
                 }}
-                trigger={["click"]}
+                trigger={["hover"]}
               >
-                <Avatar src="https://xsgames.co/randomusers/avatar.php?g=pixel&key=1" style={{cursor: 'pointer'}}/>
+                <Avatar
+                  src="https://xsgames.co/randomusers/avatar.php?g=pixel&key=1"
+                  style={{ cursor: "pointer" }}
+                />
               </Dropdown>
             </li>
           </ul>
