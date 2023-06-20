@@ -1,14 +1,43 @@
 import PropTypes from "prop-types";
-import { Button, Modal, Form, Input, Select } from "antd";
+import { Button, Modal, Form, Select, InputNumber } from "antd";
+import useUpdateTable from "./hooks/useUpdateTable";
+import { useUpdateOneTable } from "../../../../services/Home/services";
 
 const { Option } = Select;
-const { TextArea } = Input;
 
 const UpdateTable = (props) => {
-  const { isModalVisible, handleModalClose } = props;
+  const [form] = Form.useForm();
+  const { isModalVisible, handleModalClose, selectedTableNumber } = props;
+
+  const {data, isLoading } = useUpdateTable(selectedTableNumber);
+
+  const {mutate} = useUpdateOneTable();
+
+  if(isLoading){
+    return <div>Loading...</div>
+  }
+
+  const handleCapacityChange = (value) => {
+    form.setFieldsValue({ depositPrice: value }); 
+  };
+
+  const handlePriceChange = (value) => {
+    form.setFieldsValue({ capacity: value }); 
+  };
+
+
+  const initialValues = data ? {
+    tableNumber: data[0].tableNumber,
+    depositPrice: +data[0].depositPrice.$numberDecimal,
+    capacity: data[0].capacity
+  } : {}
+
 
   const onFinish = (values) => {
     console.log("Success:", values);
+    mutate(values)
+    handleModalClose()
+    // update(values)
   };
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
@@ -21,7 +50,9 @@ const UpdateTable = (props) => {
       footer={null}
     >
       <Form
+        initialValues={initialValues}
         name="basic"
+        form={form}
         labelAlign="left"
         labelCol={{
           span: 6,
@@ -32,37 +63,35 @@ const UpdateTable = (props) => {
         style={{
           maxWidth: 500,
         }}
-        initialValues={{
-          remember: true,
-        }}
+    
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         autoComplete="off"
       >
-        <Form.Item
-          label="Table's name"
-          name="name"
+         <Form.Item
+          label="Table's number"
+          name="tableNumber"
           rules={[
             {
               required: true,
-              message: "Please input your table's name!",
+              message: "Please input your table's number!",
             },
           ]}
         >
-          <Input />
+          <InputNumber style={{width: '100%'}}/>
         </Form.Item>
         {/*  */}
         <Form.Item
-          label="Seats"
-          name="seats"
+          label="Capacity"
+          name="capacity"
           rules={[
             {
               required: true,
-              message: "Please input your seats in table!",
+              message: "Please input your capacity in table!",
             },
           ]}
         >
-          <Select>
+          <Select onChange={handleCapacityChange}>
             <Option value={4}>4</Option>
             <Option value={6}>6</Option>
             <Option value={10}>10</Option>
@@ -70,16 +99,20 @@ const UpdateTable = (props) => {
         </Form.Item>
         {/*  */}
         <Form.Item
-          label="Description"
-          name="description"
+          label="Deposit"
+          name="depositPrice"
           rules={[
             {
               required: true,
-              message: "Please input your description!",
+              message: "Please input your deposit",
             },
           ]}
         >
-          <TextArea rows={8} />
+          <Select onChange={handlePriceChange}>
+            <Option value={4}>4$</Option>
+            <Option value={6}>6$</Option>
+            <Option value={10}>10$</Option>
+          </Select>
         </Form.Item>
 
         <Form.Item
@@ -98,6 +131,7 @@ const UpdateTable = (props) => {
 };
 
 UpdateTable.propTypes = {
+  selectedTableNumber: PropTypes.number.isRequired,
   isModalVisible: PropTypes.bool,
   handleModalClose: PropTypes.func,
 };

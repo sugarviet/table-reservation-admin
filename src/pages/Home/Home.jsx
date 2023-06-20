@@ -1,12 +1,20 @@
 import { useState } from "react";
-import { Tabs, Table, Button } from "antd";
+import { Tabs, Table, Button, Tag } from "antd";
 import styles from "./Home.module.css";
 import ReservationInfo from "./components/ReservationInfo/ReservationInfo";
 // import CreateTable from "../CreateTable/CreateTable";
 import AddTable from "./components/AddTable/AddTable";
 import UpdateTable from "./components/UpdateTable/UpdateTable";
 
-import { DeleteOutlined, EyeOutlined, EditOutlined, PlusCircleOutlined } from '@ant-design/icons';
+import {
+  EyeOutlined,
+  EditOutlined,
+  PlusCircleOutlined,
+} from "@ant-design/icons";
+import {
+  useGetTableBasedOnCapacity,
+  useUpdateOneTableStatus,
+} from "../../services/Home/services";
 
 const { TabPane } = Tabs;
 
@@ -55,19 +63,36 @@ const tables = [
 const timeSlots = ["6pm", "8pm", "10pm"];
 
 const Home = () => {
+  const { mutate: changeStatusTable } = useUpdateOneTableStatus();
+  const [selectedCapacity, setSelectedCapacity] = useState(4);
+  const { data, isLoading } = useGetTableBasedOnCapacity(selectedCapacity);
   const [selectedTable, setSelectedTable] = useState(null);
+  //
+  const [selectedTableNumber, setSelectedTableNumber] = useState(null);
+  //
   const [isModalShowTableInfoVisible, setIsShowTableInfoVisible] =
     useState(false);
   const [isModalShowAddTable, setIsModalShowAddTable] = useState(false);
   const [isModalShowUpdateTable, setIsModalShowUpdateTable] = useState(false);
- 
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  const handleTabChange = (activeKey) => {
+    console.log(activeKey);
+    setSelectedCapacity(+activeKey);
+  };
+
   const handleTableDelete = (tableId) => {
-    console.log("Deleting table with ID:", tableId);
+    console.log("change status table with ID:", tableId);
+    changeStatusTable(tableId);
   };
 
   const handleTableClick = (tableId) => {
     setSelectedTable(tableId);
     setIsShowTableInfoVisible(true);
+    setSelectedTableNumber(tableId);
   };
 
   const handleModalShowTableInfoClose = () => {
@@ -86,74 +111,126 @@ const Home = () => {
     setIsModalShowAddTable(true);
   };
 
-  const handleEditTables = () => {
+  const handleEditTables = (tableNumber) => {
     setIsModalShowUpdateTable(true);
+    setSelectedTableNumber(tableNumber);
   };
 
   const renderTableColumns = () => [
-    { title: "Table Name", dataIndex: "name", key: "name" },
-    { title: "Seats", dataIndex: "seats", key: "seats" },
-    { title: "Description", dataIndex: "description", key: "description" },
+    { title: "Table number", dataIndex: "tableNumber", key: "tableNumber" },
+    { title: "Capacity", dataIndex: "capacity", key: "capacity" },
     {
-    
+      title: "Status",
+      dataIndex: "status",
+      key: "status",
+      render: (status) => {
+        return status === 1 ? (
+          <Tag color="green">Available</Tag>
+        ) : (
+          <Tag color="red">Unavailable</Tag>
+        );
+      },
+    },
+    {
       title: "Action",
       key: "action",
       width: "25%",
       render: (_, table) => (
         <div className={styles.btnWrapper}>
-          <Button onClick={() => handleTableClick(table.id)} icon={<EyeOutlined />} type="primary">
+          <Button
+            onClick={() => handleTableClick(table.tableNumber)}
+            icon={<EyeOutlined />}
+            type="primary"
+            disabled={table.status === 0}
+          >
             View
           </Button>
-          <Button onClick={handleEditTables} icon={<EditOutlined />}>
-            Edit 
+          <Button
+            onClick={() => handleEditTables(table.tableNumber)}
+            icon={<EditOutlined />}
+            disabled={table.status === 0}
+
+          >
+            Edit
           </Button>
-          <Button onClick={() => handleTableDelete(table.id)} danger  icon={<DeleteOutlined />}>
-            Delete 
-          </Button>
+
+          {table.status === 1 ? (
+            <Button
+              onClick={() => handleTableDelete(table.tableNumber)}
+              danger
+              type="primary"
+            >
+              Disable
+            </Button>
+          ) : (
+            <Button
+              onClick={() => handleTableDelete(table.tableNumber)}
+              type="primary"
+              style={{backgroundColor: '#0bce5d'}}
+            >
+              Enable
+              {/* Change status */}
+            </Button>
+          )}
         </div>
       ),
     },
   ];
 
   const renderTableTabs = () => (
-    <Tabs defaultActiveKey="4" type="card">
+    <Tabs
+      type="card"
+      onChange={handleTabChange}
+      activeKey={selectedCapacity.toString()}
+    >
       <TabPane tab="4-Person Tables" key="4">
-        <Table
-          pagination={{ hideOnSinglePage: true }}
-          columns={renderTableColumns()}
-          dataSource={tables.filter((t) => t.seats === 4)}
-          // onRow={(record) => ({
-          //   onClick: () => handleTableClick(record.id),
-          // })}
-        />
+        <div style={{ height: "500px" }}>
+          <Table
+            pagination={{ hideOnSinglePage: true, pageSize: 5 }}
+            columns={renderTableColumns()}
+            // dataSource={tables.filter((t) => t.seats === 4)}
+            dataSource={data}
+          />
+        </div>
       </TabPane>
+
       <TabPane tab="6-Person Tables" key="6">
-        <Table
-          columns={renderTableColumns()}
-          dataSource={tables.filter((t) => t.seats === 6)}
-          // onRow={(record) => ({
-          //   onClick: () => handleTableClick(record.id),
-          // })}
-        />
+        <div style={{ height: "500px" }}>
+          <Table
+            pagination={{ hideOnSinglePage: true, pageSize: 5 }}
+            columns={renderTableColumns()}
+            // dataSource={tables.filter((t) => t.seats === 6)}
+            dataSource={data}
+          />
+        </div>
       </TabPane>
       <TabPane tab="10-Person Tables" key="10">
-        <Table
-          columns={renderTableColumns()}
-          dataSource={tables.filter((t) => t.seats === 10)}
-          // onRow={(record) => ({
-          //   onClick: () => handleTableClick(record.id),
-          // })}
-        />
+        <div style={{ height: "500px" }}>
+          <Table
+            pagination={{ hideOnSinglePage: true, pageSize: 5 }}
+            columns={renderTableColumns()}
+            // dataSource={tables.filter((t) => t.seats === 10)}
+            dataSource={data}
+          />
+        </div>
       </TabPane>
     </Tabs>
   );
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div style={{ minHeight: "609px" }}>
       {/* {renderTableTabs()} */}
       <div className={styles.titleContainer}>
         <h1 className={styles.title}>Table Management</h1>
-        <Button type="primary" onClick={handleAddTables} icon={<PlusCircleOutlined />}>
+        <Button
+          type="primary"
+          onClick={handleAddTables}
+          icon={<PlusCircleOutlined />}
+        >
           Add Tables
         </Button>
       </div>
@@ -178,6 +255,7 @@ const Home = () => {
 
       {isModalShowUpdateTable ? (
         <UpdateTable
+          selectedTableNumber={selectedTableNumber}
           isModalVisible={isModalShowUpdateTable}
           handleModalClose={handleModalShowUpdateTableClose}
         />

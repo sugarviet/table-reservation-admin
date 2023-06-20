@@ -1,0 +1,430 @@
+[{
+  "_id": {
+    "$oid": "649076ac651b15a4ca9e266b"
+  },
+  "tableNumber": 13,
+  "capacity": 4,
+  "isAvailable": true,
+  "depositPrice": {
+    "$numberDecimal": "4"
+  },
+  "timeRangeType": "6h",
+  "status": 1,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "649076ac651b15a4ca9e266c"
+  },
+  "tableNumber": 13,
+  "capacity": 4,
+  "isAvailable": true,
+  "depositPrice": {
+    "$numberDecimal": "4"
+  },
+  "timeRangeType": "8h",
+  "status": 1,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "649076ac651b15a4ca9e266d"
+  },
+  "tableNumber": 13,
+  "capacity": 4,
+  "isAvailable": true,
+  "depositPrice": {
+    "$numberDecimal": "4"
+  },
+  "timeRangeType": "10h",
+  "status": 1,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "649076f9651b15a4ca9e2672"
+  },
+  "tableNumber": 12,
+  "capacity": 6,
+  "isAvailable": true,
+  "depositPrice": {
+    "$numberDecimal": "6"
+  },
+  "timeRangeType": "6h",
+  "status": 1,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "649076f9651b15a4ca9e2673"
+  },
+  "tableNumber": 12,
+  "capacity": 6,
+  "isAvailable": true,
+  "depositPrice": {
+    "$numberDecimal": "6"
+  },
+  "timeRangeType": "8h",
+  "status": 1,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "649076f9651b15a4ca9e2674"
+  },
+  "tableNumber": 12,
+  "capacity": 6,
+  "isAvailable": true,
+  "depositPrice": {
+    "$numberDecimal": "6"
+  },
+  "timeRangeType": "10h",
+  "status": 1,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64907703651b15a4ca9e2679"
+  },
+  "tableNumber": 14,
+  "capacity": 10,
+  "isAvailable": true,
+  "depositPrice": {
+    "$numberDecimal": "10"
+  },
+  "timeRangeType": "6h",
+  "status": 1,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64907703651b15a4ca9e267a"
+  },
+  "tableNumber": 14,
+  "capacity": 10,
+  "isAvailable": true,
+  "depositPrice": {
+    "$numberDecimal": "10"
+  },
+  "timeRangeType": "8h",
+  "status": 1,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64907703651b15a4ca9e267b"
+  },
+  "tableNumber": 14,
+  "capacity": 10,
+  "isAvailable": true,
+  "depositPrice": {
+    "$numberDecimal": "10"
+  },
+  "timeRangeType": "10h",
+  "status": 1,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64907739651b15a4ca9e2680"
+  },
+  "tableNumber": 1,
+  "capacity": 4,
+  "isAvailable": true,
+  "depositPrice": {
+    "$numberDecimal": "4"
+  },
+  "timeRangeType": "6h",
+  "status": 1,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64907739651b15a4ca9e2681"
+  },
+  "tableNumber": 1,
+  "capacity": 4,
+  "isAvailable": true,
+  "depositPrice": {
+    "$numberDecimal": "4"
+  },
+  "timeRangeType": "8h",
+  "status": 1,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64907739651b15a4ca9e2682"
+  },
+  "tableNumber": 1,
+  "capacity": 4,
+  "isAvailable": true,
+  "depositPrice": {
+    "$numberDecimal": "4"
+  },
+  "timeRangeType": "10h",
+  "status": 1,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6490773e651b15a4ca9e2687"
+  },
+  "tableNumber": 2,
+  "capacity": 6,
+  "isAvailable": true,
+  "depositPrice": {
+    "$numberDecimal": "6"
+  },
+  "timeRangeType": "6h",
+  "status": 1,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6490773e651b15a4ca9e2688"
+  },
+  "tableNumber": 2,
+  "capacity": 6,
+  "isAvailable": true,
+  "depositPrice": {
+    "$numberDecimal": "6"
+  },
+  "timeRangeType": "8h",
+  "status": 1,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6490773e651b15a4ca9e2689"
+  },
+  "tableNumber": 2,
+  "capacity": 6,
+  "isAvailable": true,
+  "depositPrice": {
+    "$numberDecimal": "6"
+  },
+  "timeRangeType": "10h",
+  "status": 1,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64907747651b15a4ca9e268e"
+  },
+  "tableNumber": 3,
+  "capacity": 6,
+  "isAvailable": true,
+  "depositPrice": {
+    "$numberDecimal": "6"
+  },
+  "timeRangeType": "6h",
+  "status": 1,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64907747651b15a4ca9e268f"
+  },
+  "tableNumber": 3,
+  "capacity": 6,
+  "isAvailable": true,
+  "depositPrice": {
+    "$numberDecimal": "6"
+  },
+  "timeRangeType": "8h",
+  "status": 1,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64907747651b15a4ca9e2690"
+  },
+  "tableNumber": 3,
+  "capacity": 6,
+  "isAvailable": true,
+  "depositPrice": {
+    "$numberDecimal": "6"
+  },
+  "timeRangeType": "10h",
+  "status": 1,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64907759651b15a4ca9e2696"
+  },
+  "tableNumber": 4,
+  "capacity": 10,
+  "isAvailable": true,
+  "depositPrice": {
+    "$numberDecimal": "10"
+  },
+  "timeRangeType": "6h",
+  "status": 1,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64907759651b15a4ca9e2697"
+  },
+  "tableNumber": 4,
+  "capacity": 10,
+  "isAvailable": true,
+  "depositPrice": {
+    "$numberDecimal": "10"
+  },
+  "timeRangeType": "8h",
+  "status": 1,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64907759651b15a4ca9e2698"
+  },
+  "tableNumber": 4,
+  "capacity": 10,
+  "isAvailable": true,
+  "depositPrice": {
+    "$numberDecimal": "10"
+  },
+  "timeRangeType": "10h",
+  "status": 1,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64907974651b15a4ca9e2715"
+  },
+  "tableNumber": 5,
+  "capacity": 4,
+  "isAvailable": true,
+  "depositPrice": {
+    "$numberDecimal": "4"
+  },
+  "timeRangeType": "6h",
+  "status": 1,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64907974651b15a4ca9e2716"
+  },
+  "tableNumber": 5,
+  "capacity": 4,
+  "isAvailable": true,
+  "depositPrice": {
+    "$numberDecimal": "4"
+  },
+  "timeRangeType": "8h",
+  "status": 1,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64907974651b15a4ca9e2717"
+  },
+  "tableNumber": 5,
+  "capacity": 4,
+  "isAvailable": true,
+  "depositPrice": {
+    "$numberDecimal": "4"
+  },
+  "timeRangeType": "10h",
+  "status": 1,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6491112609eb4d4ce0555523"
+  },
+  "tableNumber": 6,
+  "capacity": 6,
+  "isAvailable": true,
+  "depositPrice": {
+    "$numberDecimal": "6"
+  },
+  "timeRangeType": "6h",
+  "status": 1,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6491112609eb4d4ce0555524"
+  },
+  "tableNumber": 6,
+  "capacity": 6,
+  "isAvailable": true,
+  "depositPrice": {
+    "$numberDecimal": "6"
+  },
+  "timeRangeType": "8h",
+  "status": 1,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6491112609eb4d4ce0555525"
+  },
+  "tableNumber": 6,
+  "capacity": 6,
+  "isAvailable": true,
+  "depositPrice": {
+    "$numberDecimal": "6"
+  },
+  "timeRangeType": "10h",
+  "status": 1,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6491114509eb4d4ce0555533"
+  },
+  "tableNumber": 7,
+  "capacity": 6,
+  "isAvailable": true,
+  "depositPrice": {
+    "$numberDecimal": "6"
+  },
+  "timeRangeType": "6h",
+  "status": 1,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6491114509eb4d4ce0555534"
+  },
+  "tableNumber": 7,
+  "capacity": 6,
+  "isAvailable": true,
+  "depositPrice": {
+    "$numberDecimal": "6"
+  },
+  "timeRangeType": "8h",
+  "status": 1,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6491114509eb4d4ce0555535"
+  },
+  "tableNumber": 7,
+  "capacity": 6,
+  "isAvailable": true,
+  "depositPrice": {
+    "$numberDecimal": "6"
+  },
+  "timeRangeType": "10h",
+  "status": 1,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "649111b209eb4d4ce0555573"
+  },
+  "tableNumber": 8,
+  "capacity": 6,
+  "isAvailable": true,
+  "depositPrice": {
+    "$numberDecimal": "6"
+  },
+  "timeRangeType": "6h",
+  "status": 1,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "649111b209eb4d4ce0555574"
+  },
+  "tableNumber": 8,
+  "capacity": 6,
+  "isAvailable": true,
+  "depositPrice": {
+    "$numberDecimal": "6"
+  },
+  "timeRangeType": "8h",
+  "status": 1,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "649111b209eb4d4ce0555575"
+  },
+  "tableNumber": 8,
+  "capacity": 6,
+  "isAvailable": true,
+  "depositPrice": {
+    "$numberDecimal": "6"
+  },
+  "timeRangeType": "10h",
+  "status": 1,
+  "__v": 0
+}]

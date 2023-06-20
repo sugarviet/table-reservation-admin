@@ -8,7 +8,6 @@ function App() {
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
 
-
   if(!token) {
     navigate("/", { replace: true });
     return (

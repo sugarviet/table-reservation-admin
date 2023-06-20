@@ -1,17 +1,35 @@
+import { useState } from "react";
 import PropTypes from "prop-types";
-import { Button, Modal, Form, Input, Select } from "antd";
+import { Button, Modal, Form, Select, InputNumber } from "antd";
+import { useAddOneTable } from "../../../../services/Home/services";
 
 const { Option } = Select;
-const { TextArea } = Input;
+// const { TextArea } = Input;
 
 const AddTable = (props) => {
+  const [form] = Form.useForm();
+  const {mutate} = useAddOneTable();
   const { isModalVisible, handleModalClose } = props;
+  const [capacity, setCapacity] = useState(4);
+
+  // form.setFieldsValue({depositPrice: 2})
 
   const onFinish = (values) => {
     console.log("Success:", values);
+    mutate(values);
+    handleModalClose();
   };
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
+  };
+  const handleCapacityChange = (value) => {
+    setCapacity(value);
+    form.setFieldsValue({ depositPrice: value }); // Update the "Deposit" value based on the selected "Capacity"
+  };
+
+  const handlePriceChange = (value) => {
+    form.setFieldsValue({ capacity: value }); // Update the "Deposit" value based on the selected "Price"
+    setCapacity(value); // Update the "Capacity" based on the selected "Price"
   };
   return (
     <Modal
@@ -21,6 +39,7 @@ const AddTable = (props) => {
       footer={null}
     >
       <Form
+      form={form}
         name="basic"
         labelAlign="left"
         labelCol={{
@@ -40,36 +59,79 @@ const AddTable = (props) => {
         autoComplete="off"
       >
         <Form.Item
-          label="Table's name"
-          name="name"
+          label="Table's number"
+          name="tableNumber"
           rules={[
             {
               required: true,
-              message: "Please input your table's name!",
+              message: "Please input your table's number!",
             },
           ]}
         >
-          <Input />
+          <InputNumber style={{width: '100%'}}/>
         </Form.Item>
         {/*  */}
         <Form.Item
-          label="Seats"
-          name="seats"
+          label="Capacity"
+          name="capacity"
           rules={[
             {
               required: true,
-              message: "Please input your seats in table!",
+              message: "Please input your capacity in table!",
             },
           ]}
         >
-          <Select>
+          <Select onChange={handleCapacityChange} value={capacity}>
             <Option value={4}>4</Option>
             <Option value={6}>6</Option>
             <Option value={10}>10</Option>
           </Select>
         </Form.Item>
         {/*  */}
+        {/* <Form.Item
+          label="Time range"
+          name="timeRangeType"
+          rules={[
+            {
+              required: true,
+              message: "Please input your time range in table!",
+            },
+          ]}
+        >
+          <Select>
+            <Option value={"4h"}>4h</Option>
+            <Option value={"6h"}>6h</Option>
+            <Option value={"10h"}>10h</Option>
+          </Select>
+        </Form.Item> */}
+        {/*  */}
+        {/*  */}
         <Form.Item
+          label="Deposit"
+          name="depositPrice"
+          rules={[
+            {
+              required: true,
+              message: "Please input your deposit",
+            },
+          ]}
+        >
+          <Select onChange={handlePriceChange} value={capacity}>
+            <Option value={4}>4$</Option>
+            <Option value={6}>6$</Option>
+            <Option value={10}>10$</Option>
+            {/* {form.getFieldValue("capacity") === 4 ? (
+              <Option value={4}>4$</Option>
+            ) : (
+              <>
+                <Option value={6}>6$</Option>
+                <Option value={10}>10$</Option>
+              </>
+            )} */}
+          </Select>
+        </Form.Item>
+        {/*  */}
+        {/* <Form.Item
           label="Description"
           name="description"
           rules={[
@@ -80,7 +142,7 @@ const AddTable = (props) => {
           ]}
         >
           <TextArea rows={8} />
-        </Form.Item>
+        </Form.Item> */}
 
         <Form.Item
           wrapperCol={{
