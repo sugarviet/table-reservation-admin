@@ -5,9 +5,6 @@ import ReservationInfo from "./components/ReservationInfo/ReservationInfo";
 import AddTable from "./components/AddTable/AddTable";
 import UpdateTable from "./components/UpdateTable/UpdateTable";
 
-// 
-// import jwt_decode from 'jwt-decode';
-
 import {
   EyeOutlined,
   EditOutlined,

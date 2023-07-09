@@ -130,20 +130,6 @@ const AddTable = (props) => {
             )} */}
           </Select>
         </Form.Item>
-        {/*  */}
-        {/* <Form.Item
-          label="Description"
-          name="description"
-          rules={[
-            {
-              required: true,
-              message: "Please input your description!",
-            },
-          ]}
-        >
-          <TextArea rows={8} />
-        </Form.Item> */}
-
         <Form.Item
           wrapperCol={{
             offset: 11,
