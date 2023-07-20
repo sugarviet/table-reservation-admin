@@ -30,3 +30,13 @@ export const getTableByNumber = async (tableNumber) => {
   const res = await request.get(`${API.GET_TABLE_BY_NUMBER}/${tableNumber}`);
   return res.data.listTable;
 };
+
+export const getReservationByTableAndTimeRangeWithStatusBooked = async ({
+  selectedTableCheck,
+  timeRangeType,
+}) => {
+  const res = await request.get(
+    `${API.GET_RESERVATION_BY_TABLE_TIME_BOOKED}?tableNumber=${selectedTableCheck}&timeRangeType=${timeRangeType}`
+  );
+  return res.data.reservation;
+};

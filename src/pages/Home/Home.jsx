@@ -4,7 +4,6 @@ import styles from "./Home.module.css";
 import ReservationInfo from "./components/ReservationInfo/ReservationInfo";
 import AddTable from "./components/AddTable/AddTable";
 import UpdateTable from "./components/UpdateTable/UpdateTable";
-
 import {
   EyeOutlined,
   EditOutlined,
@@ -16,17 +15,13 @@ import {
 } from "../../services/Home/services";
 
 const { TabPane } = Tabs;
-
 const timeSlots = ["6pm", "8pm", "10pm"];
-
 const Home = () => {
   const { mutate: changeStatusTable } = useUpdateOneTableStatus();
   const [selectedCapacity, setSelectedCapacity] = useState(4);
   const { data, isLoading } = useGetTableBasedOnCapacity(selectedCapacity);
   const [selectedTable, setSelectedTable] = useState(null);
-  //
   const [selectedTableNumber, setSelectedTableNumber] = useState(null);
-  //
   const [isModalShowTableInfoVisible, setIsShowTableInfoVisible] =
     useState(false);
   const [isModalShowAddTable, setIsModalShowAddTable] = useState(false);
@@ -66,9 +61,13 @@ const Home = () => {
     setIsModalShowUpdateTable(true);
     setSelectedTableNumber(tableNumber);
   };
-
   const renderTableColumns = () => [
-    { title: "Table number", dataIndex: "tableNumber", key: "tableNumber" },
+    {
+      title: "Table number",
+      dataIndex: "tableNumber",
+      key: "tableNumber",
+      render: (text, record) => <h4>Table {text}</h4>,
+    },
     { title: "Capacity", dataIndex: "capacity", key: "capacity" },
     {
       title: "Status",
@@ -100,11 +99,9 @@ const Home = () => {
             onClick={() => handleEditTables(table.tableNumber)}
             icon={<EditOutlined />}
             disabled={table.status === 0}
-
           >
             Edit
           </Button>
-
           {table.status === 1 ? (
             <Button
               onClick={() => handleTableDelete(table.tableNumber)}
@@ -117,10 +114,9 @@ const Home = () => {
             <Button
               onClick={() => handleTableDelete(table.tableNumber)}
               type="primary"
-              style={{backgroundColor: '#0bce5d'}}
+              style={{ backgroundColor: "#0bce5d" }}
             >
               Enable
-              {/* Change status */}
             </Button>
           )}
         </div>
@@ -189,7 +185,6 @@ const Home = () => {
           handleModalClose={handleModalShowTableInfoClose}
           isModalVisible={isModalShowTableInfoVisible}
           selectedTable={selectedTable}
-          // tables={tables}
           timeSlots={timeSlots}
         />
       ) : null}

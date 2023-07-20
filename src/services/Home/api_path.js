@@ -7,4 +7,6 @@ export const API = {
   EDIT_TABLE: "http://localhost:7070/table/edit",
   GET_WITH_CAPACITY: "http://localhost:7070/table/getWithCapacity",
   EDIT_STATUS_TABLE: "http://localhost:7070/table/enableDisableTable",
+  GET_RESERVATION_BY_TABLE_TIME_BOOKED:
+    "http://localhost:7070/reservation/getReservation",
 };

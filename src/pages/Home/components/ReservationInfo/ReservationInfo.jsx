@@ -1,20 +1,32 @@
 import PropTypes from "prop-types";
-import { Table, Modal, Tag } from "antd";
+import { Table, Modal, Tag, Button } from "antd";
+import { EyeOutlined } from "@ant-design/icons";
 import { useGetTableByNumber } from "../../../../services/Home/services";
-
-// const timeSlotData = ["6h", "8h", "10h"];
+import CheckUserReservation from "../CheckUserReservation/CheckUserReservation";
+import { useState } from "react";
 
 const ReservationInfo = (props) => {
-  const { selectedTable, isModalVisible, handleModalClose } =
-    props;
-    
-    const {data, isLoading} = useGetTableByNumber(selectedTable);
+  const { selectedTable, isModalVisible, handleModalClose } = props;
+  const { data, isLoading } = useGetTableByNumber(selectedTable);
+  const [isModalShowTableInfoVisible, setIsShowTableInfoVisible] =
+    useState(false);
+  const [selectedTableCheck, setSelectedTableCheck] = useState(null);
+  const [timeRangeType, setTimeRangeType] = useState(null);
 
-    console.log('dataDetail', data);
+  console.log("dataDetail", data);
 
-    if(isLoading){
-      return <div>Loading...</div>
-    }
+  const handleTableClick = (tableId, timeRangeType) => {
+    setSelectedTableCheck(tableId);
+    setIsShowTableInfoVisible(true);
+    setTimeRangeType(timeRangeType);
+  };
+  const handleModalShowTableInfoClose = () => {
+    setIsShowTableInfoVisible(false);
+  };
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
   return (
     <Modal
       title={`Booked Time Slots for Table ${selectedTable}`}
@@ -24,31 +36,53 @@ const ReservationInfo = (props) => {
     >
       <Table
         columns={[
-          // { title: "Time Slot", dataIndex: "time", key: "time" },
-          { title: "Time Slot", dataIndex: "timeRangeType", key: "timeRangeType" },
-          { title: "Status", dataIndex: "isAvailable", key: "isAvailable",
-          render: (status) => {
-            return status === true ? <Tag color="green">Available</Tag> : <Tag color="red">Unavailable</Tag>;
-          }, },
+          {
+            title: "Time Slot",
+            dataIndex: "timeRangeType",
+            key: "timeRangeType",
+          },
+          {
+            title: "Status",
+            dataIndex: "isAvailable",
+            key: "isAvailable",
+            render: (status) => {
+              return status === true ? (
+                <Tag color="green">Available</Tag>
+              ) : (
+                <Tag color="RGB(246 199 107)">Booked</Tag>
+              );
+            },
+          },
+          {
+            title: "Action",
+            key: "action",
+            width: "25%",
+            render: (_, table) => (
+              <div>
+                <Button
+                  onClick={() =>
+                    handleTableClick(table.tableNumber, table.timeRangeType)
+                  }
+                  icon={<EyeOutlined />}
+                  disabled={table.isAvailable === true}
+                >
+                  Check
+                </Button>
+              </div>
+            ),
+          },
         ]}
-        // dataSource={tables
-        //   .filter((table) => table.id === selectedTable)
-        //   .flatMap((table) =>
-        //     timeSlots.map((time) => ({
-        //       key: time,
-        //       time: time,
-        //       customer: table.reservations.some(
-        //         (reservation) => reservation.time === time
-        //       )
-        //         ? table.reservations.find(
-        //             (reservation) => reservation.time === time
-        //           ).customer
-        //         : "Available",
-        //     }))
-        //   )}
         dataSource={data}
         pagination={false}
       />
+      {isModalShowTableInfoVisible ? (
+        <CheckUserReservation
+          handleModalClose={handleModalShowTableInfoClose}
+          isModalVisible={isModalShowTableInfoVisible}
+          selectedTableCheck={selectedTableCheck}
+          timeRangeType={timeRangeType}
+        />
+      ) : null}
     </Modal>
   );
 };
