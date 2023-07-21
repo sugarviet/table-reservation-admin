@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Tabs, Table, Button, Tag } from "antd";
+import { Tabs, Table, Button, Tag, Popconfirm } from "antd";
 import styles from "./Home.module.css";
 import ReservationInfo from "./components/ReservationInfo/ReservationInfo";
 import AddTable from "./components/AddTable/AddTable";
@@ -70,7 +70,7 @@ const Home = () => {
     },
     { title: "Capacity", dataIndex: "capacity", key: "capacity" },
     {
-      title: "Status",
+      title: "Table Status",
       dataIndex: "status",
       key: "status",
       render: (status) => {
@@ -102,23 +102,22 @@ const Home = () => {
           >
             Edit
           </Button>
-          {table.status === 1 ? (
-            <Button
-              onClick={() => handleTableDelete(table.tableNumber)}
-              danger
-              type="primary"
-            >
-              Disable
-            </Button>
-          ) : (
-            <Button
-              onClick={() => handleTableDelete(table.tableNumber)}
-              type="primary"
-              style={{ backgroundColor: "#0bce5d" }}
-            >
-              Enable
-            </Button>
-          )}
+          <Popconfirm
+            title="Change The Status Of This Table...?"
+            onConfirm={() => handleTableDelete(table.tableNumber)}
+            okText="Yes"
+            cancelText="No"
+          >
+            {table.status === 1 ? (
+              <Button danger type="primary">
+                Disable
+              </Button>
+            ) : (
+              <Button type="primary" style={{ backgroundColor: "#0bce5d" }}>
+                Enable
+              </Button>
+            )}
+          </Popconfirm>
         </div>
       ),
     },

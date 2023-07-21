@@ -21,7 +21,7 @@ const CheckUserReservation = (props) => {
   }
   return (
     <Modal
-      title={`Booked Time Slots for Table ${selectedTableCheck}`}
+      title={`Information Of Table ${selectedTableCheck}`}
       visible={isModalVisible}
       onCancel={handleModalClose}
       footer={null}
@@ -32,11 +32,13 @@ const CheckUserReservation = (props) => {
             title: "Full Name",
             dataIndex: "fullName",
             key: "fullName",
+            render: (text, record) => <p> {text}</p>,
           },
           {
             title: "Phone",
             dataIndex: "phone",
             key: "phone",
+            render: (text, record) => <p> 0{text}</p>,
           },
         ]}
         dataSource={data}
